@@ -23,26 +23,6 @@ Log2Ram is based on transient `/var/log` for Systemd. For more information, chec
 
 ## Installation
 
-### Via APT (recommended) (generalized)
-
-```bash
-. /etc/os-release
-sudo wget -O /usr/share/keyrings/azlux-archive-keyring.gpg https://azlux.fr/repo.gpg
-sudo tee /etc/apt/sources.list.d/azlux.list >/dev/null <<EOF
-deb [signed-by=/usr/share/keyrings/azlux-archive-keyring.gpg] http://packages.azlux.fr/debian/ $VERSION_CODENAME main
-EOF
-# Debian 13 Trixie needs a better Log2Ram source; see https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1122989
-[ "$VERSION_CODENAME" = trixie ] && sudo tee /etc/apt/preferences.d/log2ram.pref >/dev/null <<EOF
-Package: log2ram
-Pin: origin packages.azlux.fr
-Pin-Priority: 1001
-EOF
-sudo apt update
-sudo apt install log2ram
-```
-
-### Manually
-
 ```bash
 curl -L https://github.com/azlux/log2ram/archive/master.tar.gz | tar zxf -
 cd log2ram-master
@@ -200,14 +180,6 @@ systemctl status log2ram
 ## Uninstallation :(
 
 (Because sometimes we need it)
-
-### Via APT
-
-```bash
-sudo apt remove log2ram
-```
-
-You can add the `--purge` argument to remove Log2Ram config files as well.
 
 ### Manually
 
